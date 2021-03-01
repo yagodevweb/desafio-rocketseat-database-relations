@@ -1,14 +1,10 @@
-# Resolução do desafio proposto no bootcamp GoStack da RocketSeat.
-
-## Abaixo a descrição do desafio:
-
-<img alt="GoStack" src="https://storage.googleapis.com/golden-wind/bootcamp-gostack/header-desafios.png" />
+<img alt="GoStack" src="https://storage.googleapis.com/golden-wind/bootcamp-gostack/header-desafios-new.png" />
 
 <h3 align="center">
   Desafio 09: Relacionamentos com banco de dados no Node.js
 </h3>
 
-<p align="center">“Mude você e todo o resto mudará naturalmente”!</blockquote>
+<blockquote align="center">“Mude você e todo o resto mudará naturalmente”!</blockquote>
 
 <p align="center">
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/rocketseat/bootcamp-gostack-desafios?color=%2304D361">
@@ -50,11 +46,11 @@ Agora navegue até a pasta criada e abra no Visual Studio Code, lembre-se de exe
 
 Agora que você já está com o template clonado e pronto para continuar, você deve verificar os arquivos da pasta `src` e completar onde não possui código com o código para atingir os objetivos de cada rota.
 
-- **`POST /customers`**: A rota deve receber `name` e `email` dentro do corpo da requisição, sendo o `name` o nome do cliente a ser cadastrado. Ao cadastrar um novo cliente, ele deve ser armazenado dentro do seu banco de dados e deve ser retornado o cliente criado. Ao cadastrar no banco de dados, na tabela `customers` ele deverá possuir os campos possuindo os campos `name`, `email`, `created_at`, `updated_at`.
+- **`POST /customers`**: A rota deve receber `name` e `email` dentro do corpo da requisição, sendo o `name` o nome do cliente a ser cadastrado. Ao cadastrar um novo cliente, ele deve ser armazenado dentro do seu banco de dados e deve ser retornado o cliente criado. Ao cadastrar no banco de dados, na tabela `customers` deverá possuir os campos `name`, `email`, `created_at`, `updated_at`.
 
 **Dica**: Antes de criar um novo cliente, sempre verifique se já existe um cliente com o mesmo e-mail. Caso ela exista, retorne um erro.
 
-- **`POST /products`**: Essa rota deve receber `name`, `price` e `quantity` dentro do corpo da requisição, sendo o `name` o nome do produto a ser cadastrado, `price` o valor unitário e `quantity` a quantidade existente em estoque do produto. Com esses dados devem ser criados no banco de dados um novo produto com os seguitnes campos: `name`, `price`, `quantity`, `created_at`, `updated_at`.
+- **`POST /products`**: Essa rota deve receber `name`, `price` e `quantity` dentro do corpo da requisição, sendo o `name` o nome do produto a ser cadastrado, `price` o valor unitário e `quantity` a quantidade existente em estoque do produto. Com esses dados devem ser criados no banco de dados um novo produto com os seguintes campos: `name`, `price`, `quantity`, `created_at`, `updated_at`.
 
 **Dica 1**: Antes de criar um novo produto, sempre verifique se já existe um produto com o mesmo nome. Caso ela exista, retorne um erro.
 
@@ -64,7 +60,7 @@ Agora que você já está com o template clonado e pronto para continuar, você 
 
 **Dica 1**: Nessa funcionalidade, você precisará fazer um relacionamento de N:N entre produtos e pedidos, onde vários produtos podem estar em vários pedidos, com isso você deve sempre armazenar o valor do produto no momento da compra e a quantidade pedida na tabela pivô com nome de `orders_products`, essa tabela vai ter os campos `id`, `order_id`, `product_id`, `quantity`, `price`, `created_at` e `updated_at`. Para esse tipo de relacionamento, você pode verificar na documentação do TypeORM sobre [como fazer relacionamento muitos-para-muitos com propriedades customizadas](https://github.com/typeorm/typeorm/blob/master/docs/many-to-many-relations.md#many-to-many-relations-with-custom-properties).
 
-**Dica 2**: Além disso, você pode também utilizar o método de cascade o TypeORM, que irá adicionar na sua tabela `order_products` os produtos que você passar por parametro para a entidade de `orders` automaticamente, você pode saber mais sobre isso aqui: [Opção de cascade](https://github.com/typeorm/typeorm/blob/master/docs/relations.md#cascade-options)
+**Dica 2**: Além disso, você pode também utilizar o método de cascade do TypeORM, que irá adicionar na sua tabela `order_products` os produtos que você passar por parametro para a entidade de `orders` automaticamente, você pode saber mais sobre isso aqui: [Opção de cascade](https://github.com/typeorm/typeorm/blob/master/docs/relations.md#cascade-options)
 
 **Dica 3**: A sua requisição do insomnia deve enviar um JSON com o formato parecido com esse:
 
@@ -166,7 +162,15 @@ Para esse desafio, temos os seguintes testes:
 
 ## :calendar: Entrega
 
-Esse desafio deve ser entregue a partir da plataforma Skylab, envie o link do repositório que você fez suas alterações. Após concluir o desafio, fazer um post no Linkedin e postar o código no Github é uma boa forma de demonstrar seus conhecimentos e esforços para evoluir na sua carreira para oportunidades futuras.
+Esse desafio deve ser entregue a partir da plataforma da Rocketseat, envie o link do repositório que você fez suas alterações. Após concluir o desafio, fazer um post no Linkedin e postar o código no Github é uma boa forma de demonstrar seus conhecimentos e esforços para evoluir na sua carreira para oportunidades futuras.
+
+## Solução do desafio
+
+Caso você queira ver como resolver o desafio, fizemos um video explicando o passo a passo para cumprir com todos os requisitos da aplicação:
+
+<a href="https://www.youtube.com/watch?v=nYcdmLIPr7s" target="_blank" align="center">
+  <img src="./assets/challenge-09-thumb.png">
+</a>
 
 ## :memo: Licença
 

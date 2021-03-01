@@ -11,16 +11,16 @@ import OrdersProducts from '@modules/orders/infra/typeorm/entities/OrdersProduct
 
 @Entity('products')
 class Product {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn()
   id: string;
 
   @Column()
   name: string;
 
-  @Column({ type: 'numeric', precision: 10, scale: 2 })
+  @Column('decimal')
   price: number;
 
-  @Column('integer')
+  @Column()
   quantity: number;
 
   @OneToMany(() => OrdersProducts, order => order.product)
