@@ -1,32 +1,26 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-// eslint-disable-next-line import/prefer-default-export
-export class CreateProductsTable1597965878040 implements MigrationInterface {
-  public async up(queryRunner: QueryRunner): Promise<any> {
+export default class CreateCustomers1590025834429
+  implements MigrationInterface {
+  public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'products',
+        name: 'customers',
         columns: [
           {
             name: 'id',
             type: 'uuid',
             isPrimary: true,
-            isGenerated: true,
             generationStrategy: 'uuid',
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'name',
             type: 'varchar',
           },
           {
-            name: 'price',
-            type: 'decimal',
-            precision: 10,
-            scale: 2,
-          },
-          {
-            name: 'quantity',
-            type: 'integer',
+            name: 'email',
+            type: 'varchar',
           },
           {
             name: 'created_at',
@@ -36,14 +30,14 @@ export class CreateProductsTable1597965878040 implements MigrationInterface {
           {
             name: 'updated_at',
             type: 'timestamp',
-            isNullable: true,
+            default: 'now()',
           },
         ],
       }),
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<any> {
-    await queryRunner.dropTable('products');
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable('customers');
   }
 }

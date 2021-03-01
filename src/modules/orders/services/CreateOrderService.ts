@@ -22,66 +22,44 @@ class CreateOrderService {
   constructor(
     @inject('OrdersRepository')
     private ordersRepository: IOrdersRepository,
+
     @inject('ProductsRepository')
     private productsRepository: IProductsRepository,
-    @inject('CustormersRepository')
+
+    @inject('CustomersRepository')
     private customersRepository: ICustomersRepository,
   ) {}
 
   public async execute({ customer_id, products }: IRequest): Promise<Order> {
-    const customerExists = await this.customersRepository.findById(customer_id);
+    const customer = await this.customersRepository.findById(customer_id);
 
-    if (!customerExists) {
-      throw new AppError('Customer not exists', 400);
+    if (!customer) {
+      throw new AppError('Customer does not exists');
     }
 
-    const productsRegistered = await this.productsRepository.findAllById(
-      products,
-    );
+    const productsIds = products.map(product => {
+      return { id: product.id };
+    });
 
-    if (!productsRegistered || productsRegistered.length !== products.length) {
-      throw new AppError('There is invalid products', 400);
-    }
+    const productsData = await this.productsRepository.findAllById(productsIds);
 
-    for (let i = 0; i < products.length; i += 1) {
-      const product = productsRegistered.filter(
-        value => value.id === products[i].id,
+    const productsFinal = productsData.map(productData => {
+      const productFinal = products.find(
+        productFind => productFind.id === productData.id,
       );
 
-      if (product[0].quantity < products[i].quantity) {
-        throw new AppError('Invalid product quantity', 400);
-      }
-    }
-
-    const updateQuantities = products.map(product => {
-      const { price = 0, quantity = 0 } = productsRegistered.filter(
-        value => value.id === product.id,
-      )[0];
-
       return {
-        id: product.id,
-        price,
-        quantity: quantity - product.quantity,
+        product_id: productData.id,
+        price: productData.price,
+        quantity: productFinal?.quantity || 0,
       };
     });
 
-    await this.productsRepository.updateQuantity(updateQuantities);
-
-    const formattedProducts = products.map(product => {
-      const { price = 0 } = productsRegistered.filter(
-        value => value.id === product.id,
-      )[0];
-
-      return {
-        product_id: product.id,
-        price,
-        quantity: product.quantity,
-      };
-    });
+    await this.productsRepository.updateQuantity(products);
 
     const order = await this.ordersRepository.create({
-      customer: customerExists,
-      products: formattedProducts,
+      customer,
+      products: productsFinal,
     });
 
     return order;
